@@ -6,15 +6,15 @@ const DropdownCheckbox = ({ genres, onGenreSelect }) => {
 
   const handleCheckboxChange = (genre) => {
     const updatedGenres = selectedGenres.includes(genre)
-      ? selectedGenres.filter((g) => g !== genre) // Remove genre
-      : [...selectedGenres, genre]; // Add genre
+      ? selectedGenres.filter((g) => g !== genre)
+      : [...selectedGenres, genre];
 
     setSelectedGenres(updatedGenres);
-    onGenreSelect(updatedGenres); // Notify parent component
+    onGenreSelect(updatedGenres);
   };
 
   const toggleDropdown = () => {
-    setIsOpen((prev) => !prev); // Toggle dropdown open/close state
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -47,9 +47,9 @@ const DropdownCheckbox = ({ genres, onGenreSelect }) => {
       {isOpen && (
         <div
           id="dropdownDefaultCheckbox"
-          className="absolute mt-2 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow z-10 transition-all "
+          className="absolute mt-2 w-48 bg-zinc-800 divide-y text-white divide-gray-100 rounded-lg shadow z-10 transition-all "
         >
-          <ul className="p-3 space-y-3 text-sm text-gray-700">
+          <ul className="p-3 space-y-3 text-sm text-white">
             {genres.map((genre) => (
               <li key={genre}>
                 <div className="flex items-center">
@@ -57,13 +57,13 @@ const DropdownCheckbox = ({ genres, onGenreSelect }) => {
                     id={`checkbox-${genre}`}
                     type="checkbox"
                     value={genre}
-                    className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500"
+                    className="w-4 h-4 text-white bg-gray-100 border-gray-300 rounded focus:ring-red-500"
                     onChange={() => handleCheckboxChange(genre)}
                     checked={selectedGenres.includes(genre)}
                   />
                   <label
                     htmlFor={`checkbox-${genre}`}
-                    className="ml-2 text-sm font-medium text-gray-900"
+                    className="ml-2 text-sm font-medium text-white"
                   >
                     {genre}
                   </label>
