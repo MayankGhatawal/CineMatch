@@ -1,4 +1,4 @@
-# CineMatch
+# CineMatch: A Movie Recommendation System
 
 ![CineMatch Logo](https://cine-match-two.vercel.app/favicon.ico)
 
