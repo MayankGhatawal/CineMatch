@@ -4,18 +4,48 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../contants/navigation";
+import DropdownCheckbox from "./Dropdown";
 
 const Header = () => {
   const location = useLocation();
   const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
   const [searchInput, setSearchInput] = useState(removeSpace);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const navigate = useNavigate();
+
+  const genres = ["Action",
+    "Adventure",
+    "Comedy",
+    "Drama",
+    "Fantasy",
+    "Horror",
+    "Mystery",
+    "Romance",
+    "Sci-Fi",
+    "Thriller",];
+
+  // useEffect(() => {
+  //   if (searchInput) {
+  //     navigate(`/search?q=${searchInput}`);
+  //   }
+  // }, [searchInput]);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   useEffect(() => {
     if (searchInput) {
       navigate(`/search?q=${searchInput}`);
     }
   }, [searchInput]);
+
+  useEffect(() => {
+    if (selectedGenres.length > 0) {
+      const genreQuery = selectedGenres.join(",");
+      navigate(`/search?q=${genreQuery}`);
+    }
+  }, [selectedGenres]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +79,7 @@ const Header = () => {
         </nav>
 
         <div className="ml-auto flex items-center gap-5">
+            <DropdownCheckbox genres={genres} onGenreSelect={setSelectedGenres} />
           <form className="flex items-center gap-2" onSubmit={handleSubmit}>
             <input
               type="text"
