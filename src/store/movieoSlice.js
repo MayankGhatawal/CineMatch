@@ -6,7 +6,7 @@ const initialState = {
 }
 
 export const movieoSlice = createSlice({
-    name : 'movieo',
+    name : 'cinematch',
     initialState,
     reducers : {
         setBannerData : (state,action)=>{
