@@ -1,7 +1,5 @@
 # CineMatch: A Movie Recommendation System
 
-![CineMatch Logo](https://cine-match-two.vercel.app/favicon.ico)
-
 CineMatch is a modern movie recommendation platform that uses advanced algorithms to help users find movies that match their preferences. Built with a sleek and intuitive user interface, CineMatch offers personalized movie suggestions, detailed information about films, and an exceptional user experience.
 
 ## 🚀 Live Demo
@@ -55,7 +53,7 @@ Visit the live application: [CineMatch](https://cine-match-two.vercel.app/)
 #### Frontend
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/cinematch-frontend.git
+   git clone https://github.com/MayankGhatawal/cinematch.git
    cd cinematch-frontend
    ```
 2. Install dependencies:
