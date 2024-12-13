@@ -38,7 +38,7 @@ Visit the live application: [CineMatch](https://cine-match-two.vercel.app/)
 ## 🖼️ Screenshots
 
 ### Homepage
-![Homepage Screenshot](https://via.placeholder.com/800x400?text=Homepage)
+![Homepage Screenshot](https://github.com/MayankGhatawal/CineMatch/blob/master/public/Screenshot%202024-12-13%20120749.png?raw=true)
 
 ### Movie Details
 ![Movie Details Screenshot](https://via.placeholder.com/800x400?text=Movie+Details)
