@@ -2,6 +2,14 @@
 
 CineMatch is a modern movie recommendation platform that uses advanced algorithms to help users find movies that match their preferences. Built with a sleek and intuitive user interface, CineMatch offers personalized movie suggestions, detailed information about films, and an exceptional user experience.
 
+## 🖼️ Screenshots
+
+### Homepage
+![Homepage Screenshot](https://github.com/MayankGhatawal/CineMatch/blob/master/public/Screenshot%202024-12-13%20120749.png?raw=true)
+
+### Movie Details
+![Movie Details Screenshot](https://github.com/MayankGhatawal/CineMatch/blob/master/public/Screenshot%202024-12-13%20121320.png?raw=true)
+
 ## 🚀 Live Demo
 
 Visit the live application: [CineMatch](https://cine-match-two.vercel.app/)
@@ -32,14 +40,6 @@ Visit the live application: [CineMatch](https://cine-match-two.vercel.app/)
 - **Search Functionality**: Quickly search for your favorite movies.
 - **Movie Details**: Get detailed information about any movie, including its cast, genre, and more.
 - **Responsive Design**: Enjoy a seamless experience across devices.
-
-## 🖼️ Screenshots
-
-### Homepage
-![Homepage Screenshot](https://github.com/MayankGhatawal/CineMatch/blob/master/public/Screenshot%202024-12-13%20120749.png?raw=true)
-
-### Movie Details
-![Movie Details Screenshot](https://github.com/MayankGhatawal/CineMatch/blob/master/public/Screenshot%202024-12-13%20121320.png?raw=true)
 
 ## 🧑‍💻 Getting Started
 
