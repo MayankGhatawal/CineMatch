@@ -4,7 +4,6 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../contants/navigation";
-import DropdownCheckbox from "./Dropdown";
 
 const Header = () => {
   const location = useLocation();
@@ -43,7 +42,7 @@ const Header = () => {
   useEffect(() => {
     if (selectedGenres.length > 0) {
       const genreQuery = selectedGenres.join(",");
-      navigate(`/search?q=${genreQuery}`);
+      navigate(`/genre/?q=${genreQuery}`);
     }
   }, [selectedGenres]);
 
@@ -76,10 +75,10 @@ const Header = () => {
               </div>
             );
           })}
+          <a className="ml-2 hover:text-neutral-100" href="/recommendations">Recommend Movies</a>
         </nav>
 
         <div className="ml-auto flex items-center gap-5">
-        <DropdownCheckbox genres={genres} onGenreSelect={setSelectedGenres} />
           <form className="flex items-center gap-2" onSubmit={handleSubmit}>
             <input
               type="text"
