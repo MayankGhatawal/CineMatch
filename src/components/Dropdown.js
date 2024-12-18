@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
+
 const DropdownCheckbox = ({ genres, onGenreSelect }) => {
   const [isOpen, setIsOpen] = useState(false); // Toggle dropdown visibility
   const [selectedGenres, setSelectedGenres] = useState([]);
+
 
   const handleCheckboxChange = (genre) => {
     const updatedGenres = selectedGenres.includes(genre)

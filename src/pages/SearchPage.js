@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../components/Card'
-
 const SearchPage = () => {
   const location = useLocation()
   const [data,setData] = useState([])
@@ -54,6 +53,7 @@ const SearchPage = () => {
   useEffect(()=>{
     window.addEventListener('scroll',handleScroll)
 },[])
+
 
   return (
     <div className='py-16'>

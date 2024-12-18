@@ -43,7 +43,7 @@ const Header = () => {
   useEffect(() => {
     if (selectedGenres.length > 0) {
       const genreQuery = selectedGenres.join(",");
-      navigate(`/search?q=${genreQuery}`);
+      navigate(`/genre/?q=${genreQuery}`);
     }
   }, [selectedGenres]);
 
