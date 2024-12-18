@@ -101,7 +101,7 @@ const RecommendationPage = () => {
           <div>
             <label className="block text-white mb-2">Select Language</label>
             <select
-              className="py-2 text-white bg-red-700 rounded-lg"
+              className="py-2.5 text-sm text-white bg-red-700 rounded-lg"
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}
             >
@@ -119,7 +119,7 @@ const RecommendationPage = () => {
             <label className="block text-white mb-2">Select Rating</label>
             <input
               type="number"
-              className="p-2 bg-red-700 text-white rounded-lg"
+              className="p-2.5 text-sm bg-red-700 text-white rounded-lg"
               min="0"
               max="10"
               step="0.1"
