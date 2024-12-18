@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../components/Card'
+import DropdownCheckbox from '../components/Dropdown'
 const SearchPage = () => {
   const location = useLocation()
   const [data,setData] = useState([])

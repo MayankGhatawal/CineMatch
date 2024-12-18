@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import ExplorePage from "../pages/ExplorePage";
 import DetailsPage from "../pages/DetailsPage";
 import SearchPage from "../pages/SearchPage";
+import GenrePage from "../pages/GenrePage";
+import RecommendPage from "../pages/Recommendations";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
             {
                 path : "search",
                 element : <SearchPage/>
+            },
+            {
+                path : "genre",
+                element : <GenrePage/>
+            },
+            {
+                path : "recommendations",
+                element : <RecommendPage/>   
             }
         ]
     }

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DropdownCheckbox from "../components/Dropdown";
+import DropdownCheckbox from "../components/DropdownCheckbox";
 import Card from "../components/Card";
 
-const GenrePage = () => {
+const TVGenrePage = () => {
   const [genres, setGenres] = useState([]);
-  const [movies, setMovies] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [tvShows, setTVShows] = useState([]);
 
-  const fetchGenres = async () => {
+  // Fetch TV genres
+  const fetchTVGenres = async () => {
     try {
       const response = await axios.get(
-        "https://api.themoviedb.org/3/genre/movie/list?language=en",
+        "https://api.themoviedb.org/3/genre/tv/list?language=en",
         {
           headers: {
             accept: "application/json",
@@ -21,16 +22,17 @@ const GenrePage = () => {
       );
       setGenres(response.data.genres);
     } catch (error) {
-      console.error("Error fetching genres:", error);
+      console.error("Error fetching TV genres:", error);
     }
   };
 
-  const fetchMoviesByGenres = async (genreIds) => {
+  // Fetch TV shows by selected genres
+  const fetchTVShowsByGenres = async (genreIds) => {
     if (genreIds.length === 0) return;
 
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?with_genres=${genreIds.join(
+        `https://api.themoviedb.org/3/discover/tv?with_genres=${genreIds.join(
           ","
         )}`,
         {
@@ -40,25 +42,25 @@ const GenrePage = () => {
           },
         }
       );
-      setMovies(response.data.results);
+      setTVShows(response.data.results);
     } catch (error) {
-      console.error("Error fetching movies by genres:", error);
+      console.error("Error fetching TV shows by genres:", error);
     }
   };
 
   useEffect(() => {
-    fetchGenres();
+    fetchTVGenres();
   }, []);
 
   useEffect(() => {
-    fetchMoviesByGenres(selectedGenres);
+    fetchTVShowsByGenres(selectedGenres);
   }, [selectedGenres]);
 
   return (
     <div className="py-16">
       <div className="container mx-auto">
         <h3 className="capitalize text-lg lg:text-xl font-semibold my-3">
-          Movies by Genre
+          TV Shows by Genre
         </h3>
 
         {/* Genre Dropdown */}
@@ -67,10 +69,10 @@ const GenrePage = () => {
           onGenreSelect={(selectedGenreIds) => setSelectedGenres(selectedGenreIds)}
         />
 
-        {/* Movies Grid */}
+        {/* TV Shows Grid */}
         <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start mt-6">
-          {movies.map((movie) => (
-            <Card data={movie} key={movie.id} media_type="movie" />
+          {tvShows.map((show) => (
+            <Card data={show} key={show.id} media_type="tv" />
           ))}
         </div>
       </div>
@@ -78,4 +80,4 @@ const GenrePage = () => {
   );
 };
 
-export default GenrePage;
+export default TVGenrePage;
