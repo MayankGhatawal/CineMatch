@@ -19,14 +19,14 @@ const DropdownCheckbox = ({ genres, onGenreSelect }) => {
 
   return (
     <div className="relative">
-      {/* Button to toggle dropdown */}
+
       <button
         id="dropdownCheckboxButton"
-        className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-11 py-2.5 text-center inline-flex items-center transition-all"
+        className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm pr-10 pl-1 py-2.5 text-center inline-flex items-center transition-all"
         type="button"
         onClick={toggleDropdown}
       >
-        Default
+        Genre
         <svg
           className="w-2.5 h-2.5 ml-3"
           xmlns="http://www.w3.org/2000/svg"
