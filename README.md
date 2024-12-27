@@ -1,5 +1,6 @@
 # CineMatch: A Movie Recommendation Web/App
 
+
 CineMatch is a modern movie recommendation platform that uses advanced algorithms to help users find movies that match their preferences. Built with a sleek and intuitive user interface, CineMatch offers personalized movie suggestions, detailed information about films, and an exceptional user experience.
 
 ## 🖼️ Screenshots
