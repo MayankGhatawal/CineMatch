@@ -7,6 +7,7 @@ import SearchPage from "../pages/SearchPage";
 import GenrePage from "../pages/GenrePage";
 import RecommendPage from "../pages/Recommendations";
 import Example from "../pages/pricing";
+import Payment from "../pages/Payment";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path : "pricing",
                 element : <Example />
+            },
+            {
+                path : "payment",
+                element : <Payment />
             }
         ]
     }

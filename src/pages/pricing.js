@@ -4,7 +4,7 @@ const tiers = [
   {
     name: 'Basic',
     id: 'tier-basic',
-    href: '#',
+    href: '/payment',
     priceMonthly: '₹199',
     description: "Enjoy movies and TV shows in standard definition.",
     features: [
@@ -19,7 +19,7 @@ const tiers = [
   {
     name: 'Premium',
     id: 'tier-premium',
-    href: '#',
+    href: 'payment',
     priceMonthly: '₹449',
     description: 'The ultimate plan with ultra-HD and multi-device streaming.',
     features: [
