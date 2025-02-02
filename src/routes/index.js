@@ -6,6 +6,7 @@ import DetailsPage from "../pages/DetailsPage";
 import SearchPage from "../pages/SearchPage";
 import GenrePage from "../pages/GenrePage";
 import RecommendPage from "../pages/Recommendations";
+import Example from "../pages/pricing";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path : "recommendations",
                 element : <RecommendPage/>   
+            },
+            {
+                path : "pricing",
+                element : <Example />
             }
         ]
     }

@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../contants/navigation";
-
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 const Header = () => {
   const location = useLocation();
   const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
@@ -12,7 +12,8 @@ const Header = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const navigate = useNavigate();
 
-  const genres = ["Action",
+  const genres = [
+    "Action",
     "Adventure",
     "Comedy",
     "Drama",
@@ -21,7 +22,8 @@ const Header = () => {
     "Mystery",
     "Romance",
     "Sci-Fi",
-    "Thriller",];
+    "Thriller",
+  ];
 
   // useEffect(() => {
   //   if (searchInput) {
@@ -75,7 +77,9 @@ const Header = () => {
               </div>
             );
           })}
-          <a className="ml-2 hover:text-neutral-100" href="/recommendations">Recommend Movies</a>
+          <a className="ml-2 hover:text-neutral-100" href="/recommendations">
+            Recommend Movies
+          </a>
         </nav>
 
         <div className="ml-auto flex items-center gap-5">
@@ -91,9 +95,15 @@ const Header = () => {
               <IoSearchOutline />
             </button>
           </form>
-          {/* <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
-            <img src={userIcon} width="w-ful h-full" alt="profile"/>
-          </div> */}
+          {/* User Profile Image */}
+          <header className="flex items-center gap-5 pl-5">
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </header>
         </div>
       </div>
     </header>
