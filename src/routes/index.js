@@ -4,6 +4,10 @@ import Home from "../pages/Home";
 import ExplorePage from "../pages/ExplorePage";
 import DetailsPage from "../pages/DetailsPage";
 import SearchPage from "../pages/SearchPage";
+import GenrePage from "../pages/GenrePage";
+import RecommendPage from "../pages/Recommendations";
+import Example from "../pages/pricing";
+import Payment from "../pages/Payment";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +29,22 @@ const router = createBrowserRouter([
             {
                 path : "search",
                 element : <SearchPage/>
+            },
+            {
+                path : "genre",
+                element : <GenrePage/>
+            },
+            {
+                path : "recommendations",
+                element : <RecommendPage/>   
+            },
+            {
+                path : "pricing",
+                element : <Example />
+            },
+            {
+                path : "payment",
+                element : <Payment />
             }
         ]
     }

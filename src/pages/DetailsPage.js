@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import useFetchDetails from '../hooks/useFetchDetails'
 import { useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import moment from 'moment'
 import Divider from '../components/Divider'
 import HorizontalScollCard from '../components/HorizontalScollCard'
 import VideoPlay from '../components/VideoPlay'
+import { SignedIn, SignIn, useUser } from '@clerk/clerk-react'
 
 const DetailsPage = () => {
   const params = useParams()
@@ -17,6 +18,17 @@ const DetailsPage = () => {
   const { data : recommendationData } = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
   const [playVideo,setPlayVideo] = useState(false)
   const [playVideoId,setPlayVideoId] = useState("")
+  const { isSignedIn } = useUser(); 
+  const navigate = useNavigate(); // Navigation hook
+
+  const handleButtonClick = () => {
+    if (isSignedIn) {
+      navigate("/pricing"); // Redirect to payment page if signed in
+    } else {
+      handlePlayVideo(data); // Play trailer if not signed in
+    }
+  };
+
 
   console.log("data",data)
   console.log("star cast",castData)
@@ -29,6 +41,8 @@ const DetailsPage = () => {
 
   const duration = (data?.runtime/60)?.toFixed(1)?.split(".")
   const writer = castData?.crew?.filter(el => el?.job === "Writer")?.map(el => el?.name)?.join(", ")
+
+
 
   return (
     <div>
@@ -49,7 +63,7 @@ const DetailsPage = () => {
                       src={imageURL+data?.poster_path}
                       className='h-80 w-60 object-cover rounded'
                   /> 
-                  <button onClick={()=>handlePlayVideo(data)} className='mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>Play Now</button>
+                  <button onClick={handleButtonClick} className='mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>{isSignedIn ? "💎 Watch Now" : "Watch Trailer"}</button>
               </div>
 
               <div>
@@ -130,7 +144,7 @@ const DetailsPage = () => {
           </div>
 
           <div>
-              <HorizontalScollCard data={similarData} heading={"Similar "+params?.explore} media_type={params?.explore}/>
+              {/* <HorizontalScollCard data={similarData} heading={"Similar "+params?.explore} media_type={params?.explore}/> */}
               <HorizontalScollCard data={recommendationData} heading={"Recommendation "+params?.explore} media_type={params?.explore}/>
           </div>
 
