@@ -81,60 +81,80 @@ const RecommendationPage = () => {
   }, [selectedGenres, selectedLanguage, rating]);
 
   return (
-    <div className="py-16">
-      <div className="container mx-auto">
-        <h3 className="capitalize text-lg lg:text-xl font-semibold my-3">
-          Recommended Movies
+    <div className="py-16 min-h-screen bg-gray-900">
+      <div className="container mx-auto pt-5 px-4">
+        <h3 className="text-2xl lg:text-3xl font-bold text-red-600 mb-8">
+          Discover Movies
         </h3>
 
         {/* Filters */}
-        <div className="flex flex-col lg:flex-row gap-11 mb-6">
-          {/* Genre Filter */}
-          <div>
-            <label className="block text-white mb-2">Select Genre</label>
-          <Filter
-            genres={genres}
-            onGenreSelect={(selectedGenreIds) => setSelectedGenres(selectedGenreIds)}
-          />
-          </div>
-          {/* Language Filter */}
-          <div>
-            <label className="block text-white mb-2">Select Language</label>
-            <select
-              className="py-2.5 px-1 text-sm text-white bg-red-700 rounded-lg"
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value)}
-            >
-              <option value="">All Languages</option>
-              {languages.map((language) => (
-                <option key={language.iso_639_1} value={language.iso_639_1}>
-                  {language.english_name}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="bg-gray-800 rounded-xl p-6 mb-8 shadow-lg">
+          <h4 className="text-xl text-white font-semibold mb-6">Filters</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Genre Filter */}
+            <div className="space-y-2">
+              <label className="block text-white font-medium">Genre</label>
+              <Filter
+                genres={genres}
+                onGenreSelect={(selectedGenreIds) => setSelectedGenres(selectedGenreIds)}
+                className="w-full"
+              />
+            </div>
 
-          {/* Rating Filter */}
-          <div>
-            <label className="block text-white mb-2">Select Rating</label>
-            <input
-              type="number"
-              className="p-2.5 text-sm bg-red-700 text-white rounded-lg"
-              min="0"
-              max="10"
-              step="0.1"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-            />
+            {/* Language Filter */}
+            <div className="space-y-2">
+              <label className="block text-white font-medium">Language</label>
+              <select
+                className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-opacity-20 transition-colors duration-200"
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+              >
+                <option value="">All Languages</option>
+                {languages.map((language) => (
+                  <option key={language.iso_639_1} value={language.iso_639_1}>
+                    {language.english_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Rating Filter */}
+            <div className="space-y-2">
+              <label className="block text-white font-medium">
+                Minimum Rating: {rating}
+              </label>
+              <div className="flex items-center space-x-4">
+                <input
+                  type="range"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500"
+                  min="0"
+                  max="10"
+                  step="0.5"
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                />
+                <span className="text-white font-medium min-w-[2.5rem]">
+                  {rating}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Movies Grid */}
-        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {recommendedMovies.map((movie) => (
             <Card data={movie} key={movie.id} media_type="movie" />
           ))}
         </div>
+
+        {recommendedMovies.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">
+              No movies found matching your criteria. Try adjusting your filters.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

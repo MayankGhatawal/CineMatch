@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const DropdownCheckbox = ({ genres, onGenreSelect }) => {
-  const [isOpen, setIsOpen] = useState(false); // Toggle dropdown visibility
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleCheckboxChange = (genre) => {
     const updatedGenres = selectedGenres.includes(genre)
@@ -10,68 +23,137 @@ const DropdownCheckbox = ({ genres, onGenreSelect }) => {
       : [...selectedGenres, genre];
 
     setSelectedGenres(updatedGenres);
-    onGenreSelect(updatedGenres); // Pass selected genres to parent
+    onGenreSelect(updatedGenres);
   };
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
 
-  return (
-    <div className="relative">
+  const getSelectedGenresText = () => {
+    if (selectedGenres.length === 0) return "Select Genres";
+    if (selectedGenres.length === 1) {
+      const genre = genres.find(g => g.id === selectedGenres[0]);
+      return genre ? genre.name : "1 Genre";
+    }
+    return `${selectedGenres.length} Genres`;
+  };
 
+  return (
+    <div className="relative" ref={dropdownRef}>
       <button
-        id="dropdownCheckboxButton"
-        className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm pr-10 pl-1 py-2.5 text-center inline-flex items-center transition-all"
-        type="button"
+        className={`
+          w-full px-4 py-3 
+          bg-gray-700 hover:bg-gray-600 
+          text-white font-medium 
+          rounded-lg
+          flex items-center justify-between
+          transition-all duration-200
+          border border-gray-600
+          focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-opacity-20
+          ${isOpen ? 'ring-2 ring-red-500 ring-opacity-20' : ''}
+        `}
         onClick={toggleDropdown}
       >
-        Genre
+        <span className="truncate">{getSelectedGenresText()}</span>
         <svg
-          className="w-2.5 h-2.5 ml-3"
+          className={`w-4 h-4 ml-2 transition-transform duration-200 ${
+            isOpen ? 'transform rotate-180' : ''
+          }`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          viewBox="0 0 10 6"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
           <path
-            stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="2"
-            d="M1 1l4 4 4-4"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
           />
         </svg>
       </button>
 
-      {isOpen && (
-        <div
-          id="dropdownDefaultCheckbox"
-          className="absolute mt-2 w-48 bg-zinc-800 divide-y text-white divide-gray-100 rounded-lg shadow z-10 transition-all"
-        >
-          <ul className="p-3 space-y-3 text-sm text-white">
-            {genres.map((genre) => (
-              <li key={genre.id}>
-                <div className="flex items-center">
-                  <input
-                    id={`checkbox-${genre.id}`}
-                    type="checkbox"
-                    value={genre.id}
-                    className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500"
-                    onChange={() => handleCheckboxChange(genre.id)}
-                    checked={selectedGenres.includes(genre.id)}
-                  />
-                  <label
-                    htmlFor={`checkbox-${genre.id}`}
-                    className="ml-2 text-sm font-medium text-white"
-                  >
-                    {genre.name}
-                  </label>
+      <div
+        className={`
+          absolute z-50 w-full mt-2
+          bg-gray-800 rounded-lg shadow-lg
+          border border-gray-700
+          transform transition-all duration-200 origin-top
+          ${isOpen 
+            ? 'opacity-100 scale-100 translate-y-0' 
+            : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
+        `}
+      >
+        <div className="p-2 max-h-60 overflow-y-auto custom-scrollbar">
+          {genres.map((genre) => (
+            <label
+              key={genre.id}
+              className={`
+                flex items-center p-2 rounded-md
+                cursor-pointer transition-colors duration-150
+                hover:bg-gray-700
+                ${selectedGenres.includes(genre.id) ? 'bg-gray-700' : ''}
+              `}
+            >
+              <div className="relative flex items-center">
+                <input
+                  type="checkbox"
+                  className="
+                    hidden
+                    peer
+                  "
+                  checked={selectedGenres.includes(genre.id)}
+                  onChange={() => handleCheckboxChange(genre.id)}
+                />
+                <div className={`
+                  w-5 h-5 
+                  border-2 rounded
+                  flex items-center justify-center
+                  transition-colors duration-200
+                  ${selectedGenres.includes(genre.id)
+                    ? 'bg-red-500 border-red-500'
+                    : 'border-gray-500 peer-hover:border-red-400'}
+                `}>
+                  {selectedGenres.includes(genre.id) && (
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+              <span className="ml-3 text-sm text-white">{genre.name}</span>
+            </label>
+          ))}
         </div>
-      )}
+      </div>
+
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #1f2937;
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #4b5563;
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #6b7280;
+        }
+      `}</style>
     </div>
   );
 };

@@ -144,7 +144,7 @@ const DetailsPage = () => {
           </div>
 
           <div>
-              {/* <HorizontalScollCard data={similarData} heading={"Similar "+params?.explore} media_type={params?.explore}/> */}
+              {/* <HorizontalScollCard data={recommendationData} heading={"Similar "+params?.explore} media_type={params?.explore}/> */}
               <HorizontalScollCard data={recommendationData} heading={"Recommendation "+params?.explore} media_type={params?.explore}/>
           </div>
 
